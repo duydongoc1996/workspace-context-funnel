@@ -13,8 +13,8 @@ if ! command -v node &> /dev/null; then
 fi
 
 if command -v uv &> /dev/null; then
-    # CRITICAL FIX: We append [gemini] to pull down the necessary parallel streaming handlers
     PIP_CMD="uv tool install"
+    # CRITICAL: Keep package variant wrapped in quotes to protect special characters from the shell
     GRAPHIFY_PKG="graphifyy[gemini]"
     echo "✅ 'uv' package engine detected. Using isolated tool strings."
 else
@@ -93,6 +93,11 @@ cp ./.graphifyignore ./.code-review-graphignore
 echo "⚙️  Injecting runtime hooks into Claude Code..."
 code-review-graph install --platform claude-code
 
+# Natively register Graphify as a project-scoped skill per reference specifications
+if command -v graphify &> /dev/null; then
+    graphify install --project
+fi
+
 # Inject local start/stop session hooks to keep code current
 cat << 'EOF' > ./.claude/settings.local.json
 {
@@ -138,7 +143,8 @@ echo "   ⚡ Compiling code-review-graph database..."
 code-review-graph build
 
 echo "   ⚡ Compiling macro Graphify context topology map..."
-graphify . -o ./graphify-out
+# Fixed: Matches the canonical package entry commands from the reference profile
+graphify update .
 
 echo "=================================================================="
 echo "🎉 SUCCESS! Your combined engine pipeline is active and configured."
