@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.git/
+graphify-out/
+.code-review-graph/
+slack-context/*
+!slack-context/*.json
+!slack-context/*.md
+notion-context/*
+!notion-context/*.json
+!notion-context/*.md
