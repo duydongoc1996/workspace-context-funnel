@@ -1,6 +1,13 @@
 # workspace-context-funnel
 A 1-click bootstrap script to chain code-review-graph, Graphify, and ast-grep into a token-efficient local stack for Claude Code
 
+
+## Usage
+```bash
+# Execute the orchestrator directly from the cloud
+curl -sSL https://raw.githubusercontent.com/duydongoc1996/workspace-context-funnel/main/init-workspace.sh | bash
+```
+
 ## 📂 Directory Structure
 ```bash
 ./
