@@ -13,16 +13,19 @@ if ! command -v node &> /dev/null; then
 fi
 
 if command -v uv &> /dev/null; then
+    # CRITICAL FIX: We append [gemini] to pull down the necessary parallel streaming handlers
     PIP_CMD="uv tool install"
+    GRAPHIFY_PKG="graphifyy[gemini]"
     echo "✅ 'uv' package engine detected. Using isolated tool strings."
 else
     PIP_CMD="pip install --user"
+    GRAPHIFY_PKG="graphifyy[gemini]"
     echo "⚠️ 'uv' not found. Falling back to standard pip."
 fi
 
 # 2. Binary Installations
 echo "📥 Ingesting static analysis core files..."
-$PIP_CMD graphifyy
+$PIP_CMD "$GRAPHIFY_PKG"
 $PIP_CMD code-review-graph
 
 if ! command -v sg &> /dev/null; then
