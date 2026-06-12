@@ -1,0 +1,16 @@
+{
+  "SessionStart": [
+    {
+      "type": "command",
+      "command": "code-review-graph build --incremental",
+      "timeout": 5
+    }
+  ],
+  "Stop": [
+    {
+      "type": "command",
+      "command": "code-review-graph build --incremental",
+      "timeout": 3
+    }
+  ]
+}
